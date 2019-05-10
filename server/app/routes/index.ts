@@ -21,10 +21,10 @@ export class Routes {
 
         // Users
         app.route('/login').post(this.userCtrl.login);
-        app.route('/register').post(this.userCtrl.register);
+        // app.route('/register').post(this.userCtrl.register);
         app.route('/users').get(this.userCtrl.getAll);
         app.route('/users/count').get(this.userCtrl.count);
-        app.route('/user').post(this.userCtrl.insert);
+        app.route('/register').post(this.userCtrl.insert);
         app.route('/user/:id').get(this.userCtrl.get);
         app.route('/user/:id').put(this.userCtrl.update);
         app.route('/user/:id').delete(this.userCtrl.delete);

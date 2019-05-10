@@ -27,8 +27,20 @@
 .content {
     margin-left: 14em;
     padding: 1em;
-    width: 100%;
-    height: calc(100% - 5em);
-    background-color: red;
-    /* background-color: #fcfcfc; */
+    /* width: 100%; */
+    height: 93vh;
+    
+    background-color: #fcfcfc;
+}
+.pd-lr-1 {
+    padding: 0 1em;
+}
+.mr-lr-1 {
+    margin: 0 1em;
+}
+.multiselect-pos {
+    display: inline-block;
+}
+.spacer {
+    height: 2.5em
 }

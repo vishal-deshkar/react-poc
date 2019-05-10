@@ -5,7 +5,10 @@ const userSchema = new mongoose.Schema({
   username: String,
   email: { type: String, unique: true, lowercase: true, trim: true },
   password: String,
-  role: String
+  role: String,
+  skills: [],
+  intrest: [],
+  totalExp: Number
 });
 
 // Before saving the user, hash the password
@@ -14,7 +17,7 @@ userSchema.pre('save', function(next) {
   if (!user.isModified('password')) { return next(); }
   bcrypt.genSalt(10, function(err: any, salt: any) {
     if (err) { return next(err); }
-    bcrypt.hash(user.password, salt, function(error, hash) {
+    bcrypt.hash(user.password, salt, function(error: any, hash: any) {
       if (error) { return next(error); }
       user.password = hash;
       next();
@@ -23,7 +26,7 @@ userSchema.pre('save', function(next) {
 });
 
 userSchema.methods.comparePassword = function(candidatePassword: any, callback: any) {
-  bcrypt.compare(candidatePassword, this.password, function(err, isMatch) {
+  bcrypt.compare(candidatePassword, this.password, function(err: any, isMatch: any) {
     if (err) { return callback(err); }
     callback(null, isMatch);
   });

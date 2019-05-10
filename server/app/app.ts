@@ -3,16 +3,19 @@ import express from "express";
 import bodyParser from "body-parser";
 import { Routes } from "./routes";
 import mongoose from 'mongoose';
-
+import expressPinoLogger from "express-pino-logger";
+import { logger } from './utils/Logger';
 class App {
     public app: express.Application;
     public routePrv: Routes = new Routes();
+    public pino: any;
 
     constructor() {
         this.app = express();
+        // this.pino = pino();
         this.config(); 
         this.routePrv.routes(this.app); 
-        // this.mongoSetup();
+        this.mongoSetup();
     }
 
     private config(): void{
@@ -28,10 +31,12 @@ class App {
         this.app.use(bodyParser.json());
         //support application/x-www-form-urlencoded post data
         this.app.use(bodyParser.urlencoded({ extended: false }));
+        
+        this.app.use(expressPinoLogger({ logger: logger }));
     }
 
     private mongoSetup(): void{
-        mongoose.connect('mongodb://localhost:27017/school', {})
+        mongoose.connect('mongodb://localhost:27017/reactPoc', {useNewUrlParser:true})
         .then(() => console.log('connection successful'))
         .catch((err) => console.error(err));
     }

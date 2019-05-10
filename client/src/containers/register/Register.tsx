@@ -29,7 +29,7 @@ class Register extends Component<any, any> {
         }
 
         this.register(user).then(res => {
-            this.props.history.push(`/login`)
+            this.props.history.push(`/`)
         })
     }
     register = (newUser: any) => {

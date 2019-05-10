@@ -13,3 +13,6 @@ label {
 .pd-0{
   padding: 0;
 }
+.disabled-link {
+  pointer-events: none;
+}

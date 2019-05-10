@@ -1,25 +1,42 @@
-import React from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom'
+import React, { Component } from 'react';
+import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-dom'
 import './App.css';
-import Landing from './landing/Landing';
-import Login from './login/Login';
-import Register from './register/Register';
-import Profile from './profile/Profile';
+import Login from './containers/login/Login';
+import Register from './containers/register/Register';
+import Dashboard from './containers/dashboard/Dashboard';
 
-const App: React.FC = () => {
-  return (
-    <Router>
-        <div className="App">
-          {/* <Navbar /> */}
-          <Route exact path="/" component={Login} />
-          <div className="container-fluid mr-0 pd-0">
-            <Route exact path="/register" component={Register} />
-            <Route exact path="/landing" component={Landing} />
-            <Route exact path="/profile" component={Profile} />
-          </div>
-        </div>
+
+class App extends React.Component<any, any> {
+  constructor(props: any) {
+    super(props);
+    this.state = {
+      isLoggedIn: false
+    }
+    this.changeLoggingStatus = this.changeLoggingStatus.bind(this)
+  }
+  changeLoggingStatus() {
+    this.setState({isLoggedIn:true})
+  }
+
+  render() {
+    return (
+      <Router>
+        <Switch>
+          <Route exact path="/login" render={(props) => <Login view={this.changeLoggingStatus} {...props} /> } />
+          <Route exact path="/" render={() => (
+            this.state.isLoggedIn ? (
+              <Dashboard />
+            ) : (
+              <Redirect to="/login"/>
+            )
+          )}/>        
+          <Route exact path="/register" component={Register} />
+          <Redirect from='/*' to='/'/>
+        </Switch>
       </Router>
-  );
+    );
+  }
 }
+
 
 export default App;
