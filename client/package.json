@@ -9,6 +9,7 @@
     "@types/react-dom": "16.8.4",
     "@types/react-redux": "^7.0.8",
     "@types/react-router-dom": "^4.3.3",
+    "@types/redux-thunk": "^2.1.0",
     "axios": "^0.18.0",
     "prop-types": "^15.7.2",
     "react": "^16.8.6",
@@ -17,6 +18,7 @@
     "react-redux": "^7.0.3",
     "react-router-dom": "^5.0.0",
     "react-scripts": "3.0.0",
+    "redux-thunk": "^2.3.0",
     "typescript": "3.4.5"
   },
   "proxy": "http://localhost:3001",

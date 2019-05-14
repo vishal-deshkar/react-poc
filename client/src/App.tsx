@@ -9,22 +9,20 @@ import Dashboard from './containers/dashboard/Dashboard';
 class App extends React.Component<any, any> {
   constructor(props: any) {
     super(props);
-    this.state = {
-      isLoggedIn: false
-    }
-    this.changeLoggingStatus = this.changeLoggingStatus.bind(this)
+    
   }
-  changeLoggingStatus() {
-    this.setState({isLoggedIn:true})
+  isLoggedIn() {
+    const token = localStorage.getItem('usertoken');
+    return token?true:false;
   }
 
   render() {
     return (
       <Router>
         <Switch>
-          <Route exact path="/login" render={(props) => <Login view={this.changeLoggingStatus} {...props} /> } />
+          <Route exact path="/login" component={Login}/>
           <Route exact path="/" render={() => (
-            this.state.isLoggedIn ? (
+            this.isLoggedIn() ? (
               <Dashboard />
             ) : (
               <Redirect to="/login"/>

@@ -1,11 +1,8 @@
 import { combineReducers } from 'redux';
-
-import articleReducer from './articleReducer';
-import searchReducer from './searchReducer';
+import profileReducer from './profile-reducer';
 
 const rootReducer = combineReducers({
-  articlesState: articleReducer,
-  searchState: searchReducer,
+  profileReducer
 });
 
 export default rootReducer;

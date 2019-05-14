@@ -28,8 +28,7 @@ class Login extends Component<any,any> {
         this.login(user).then(res => {
             if (res) {
                 localStorage.setItem('user-id', res._id);
-                this.props.view();
-                this.props.history.push(`/`)
+                this.props.history.push(`/`);
                 console.log("Login Success");
             }
         })
