@@ -5,8 +5,8 @@ class Register extends Component<any, any> {
     constructor(props: any) {
         super(props)
         this.state = {
-            first_name: '',
-            last_name: '',
+            firstname: '',
+            lastname: '',
             email: '',
             password: '',
         }
@@ -22,8 +22,8 @@ class Register extends Component<any, any> {
         e.preventDefault()
 
         const user = {
-            first_name: this.state.first_name,
-            last_name: this.state.last_name,
+            firstname: this.state.firstname,
+            lastname: this.state.lastname,
             email: this.state.email,
             password: this.state.password
         }
@@ -34,8 +34,8 @@ class Register extends Component<any, any> {
     }
     register = (newUser: any) => {
         return axios.post('/register', {
-            first_name: newUser.first_name,
-            last_name: newUser.last_name,
+            firstname: newUser.firstname,
+            lastname: newUser.lastname,
             email: newUser.email,
             password: newUser.password,
         }).then(res => {
@@ -51,21 +51,21 @@ class Register extends Component<any, any> {
                         <form noValidate>
                             <h1 className="h3 mb-3 font-weight-normal">Please sign in</h1>
                             <div className="form-group">
-                                <label className="col-md-6" htmlFor="first_name">First Name</label>
+                                <label className="col-md-6" htmlFor="firstname">First Name</label>
                                 <input type="text"
                                     className="form-control col-md-6"
-                                    name="first_name"
+                                    name="firstname"
                                     placeholder="Enter First Name"
-                                    value={this.state.first_name}
+                                    value={this.state.firstname}
                                     onChange={this.onChange} />
                             </div>
                             <div className="form-group">
-                                <label className="col-md-6" htmlFor="last_name">Last Name</label>
+                                <label className="col-md-6" htmlFor="lastname">Last Name</label>
                                 <input type="text"
                                     className="form-control col-md-6"
-                                    name="last_name"
+                                    name="lastname"
                                     placeholder="Enter Last Name"
-                                    value={this.state.last_name}
+                                    value={this.state.lastname}
                                     onChange={this.onChange} />
                             </div>
                             <div className="form-group">

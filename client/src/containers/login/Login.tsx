@@ -8,12 +8,16 @@ class Login extends Component<any,any> {
         this.state = {
             email: '',
             password: '',
+            emailValid: false,
+            passwordValid: false,
+            userValid: 1
         }
         this.onChange = this.onChange.bind(this)
         this.onSubmit = this.onSubmit.bind(this)
         this.onRegister = this.onRegister.bind(this)
     }
     onChange (e: any) {
+        this.setState({ userValid: 1 });
         this.setState({ [e.target.name]: e.target.value })
     }
 
@@ -27,6 +31,7 @@ class Login extends Component<any,any> {
 
         this.login(user).then(res => {
             if (res) {
+                this.setState({ userValid: true });
                 localStorage.setItem('user-id', res._id);
                 this.props.view();
                 this.props.history.push(`/`)
@@ -51,7 +56,8 @@ class Login extends Component<any,any> {
                 return res.data
             })
             .catch(err => {
-                console.log(err)
+                console.log(err);
+                this.setState({ userValid: 0 });
             })
     }
     render () {
@@ -78,6 +84,9 @@ class Login extends Component<any,any> {
                                     value={this.state.password}
                                     onChange={this.onChange} />
                             </div>
+                            {!this.state.userValid && (
+                                <div className="user-err">Invalid email or password</div>
+                            )}
                             <button type="submit" onClick={this.onSubmit} className="col-md-3 btn btn-lg btn-primary">
                                 Sign in
                             </button>

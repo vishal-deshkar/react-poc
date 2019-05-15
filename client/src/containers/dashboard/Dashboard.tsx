@@ -104,29 +104,7 @@ class Dashboard extends Component<any,any> {
     render () {
         
         return (
-            <div className="app">
-                <div className="top-panel">
-                    <Link to={'/'} className="navbar-brand">Brand Logo</Link>
-                    
-                </div>
-                <nav className="left-panel">
-                    <ul className="navbar-nav mr-auto">
-                        <li className="nav-item pd-lr-1">
-                            <Link to={'/'} className="nav-link">Home</Link>
-                        </li>
-                        <li className="nav-item pd-lr-1">
-                            <Link to={'/create'} className="nav-link disabled-link">TBD</Link>
-                        </li>
-                        <li className="nav-item pd-lr-1">
-                            <Link to={'/index'} className="nav-link disabled-link">TBD</Link>
-                        </li>
-                        <li className="nav-item pd-lr-1">
-                            <Link to={'/search'} className="nav-link disabled-link">Search</Link>
-                        </li>
-                    </ul>
-                    
-                </nav>
-
+            <div className="app">                
                 <div className="content">
                     <div className="container-fluid">
                         <div className="col-md-6">
