@@ -45,8 +45,10 @@ abstract class BaseCtrl {
   // Update by id
   update = async (req: any, res: any) => {
     try {
-      await this.model.findOneAndUpdate({ _id: req.params.id }, req.body);
-      res.sendStatus(200);
+      const obj = await this.model.findOneAndUpdate({ _id: req.params.id }, req.body);
+      console.log("update >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+      console.log(obj);
+      res.status(200).json(obj);
     } catch (err) {
       return res.status(400).json({ error: err.message });
     }
