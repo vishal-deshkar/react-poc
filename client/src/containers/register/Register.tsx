@@ -49,7 +49,7 @@ class Register extends Component<any, any> {
                 <div className="row">
                     <div className="col-md-6 mt-5 mx-auto">
                         <form noValidate>
-                            <h1 className="h3 mb-3 font-weight-normal">Please sign in</h1>
+                            <h1 className="h3 mb-3 font-weight-normal">Registration</h1>
                             <div className="form-group">
                                 <label className="col-md-6" htmlFor="firstname">First Name</label>
                                 <input type="text"

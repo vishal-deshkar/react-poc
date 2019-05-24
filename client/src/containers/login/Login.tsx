@@ -33,6 +33,7 @@ class Login extends Component<any,any> {
             if (res) {
                 this.setState({ userValid: true });
                 localStorage.setItem('user-id', res._id);
+                localStorage.setItem('user-name', res.firstname);
                 this.props.view();
                 this.props.history.push(`/`)
                 console.log("Login Success");
@@ -62,38 +63,44 @@ class Login extends Component<any,any> {
     }
     render () {
         return (
-            <div className="container">
-                <div className="row">
-                    <div className="col-md-6 mt-5 mx-auto">
-                        <form noValidate>
-                            <div className="form-group">
-                                <label className="col-md-6" htmlFor="email">Email Address</label>
-                                <input type="email"
-                                    className="form-control col-md-6"
-                                    name="email"
-                                    placeholder="Enter Email"
-                                    value={this.state.email}
-                                    onChange={this.onChange} />
+            <div id="login">
+                <h3 className="text-center text-white pt-5">Login form</h3>
+                <div className="container">
+                    <div id="login-row" className="row justify-content-center align-items-center">
+                        <div id="login-column" className="col-md-6">
+                            <div id="login-box" className="col-md-12">
+                                <form id="login-form" className="form">
+                                    <h3 className="text-center text-info">Login</h3>
+                                    <div className="form-group">
+                                        <label className="text-info">Username:</label><br/>
+                                        <input type="text" id="username" 
+                                            className="form-control" 
+                                            name="email"
+                                            placeholder="Enter Email"
+                                            value={this.state.email}
+                                            onChange={this.onChange}/>
+                                    </div>
+                                    <div className="form-group">
+                                        <label className="text-info">Password:</label><br/>
+                                        <input type="text" id="password" 
+                                            className="form-control"
+                                            name="password"
+                                            placeholder="Enter Password"
+                                            value={this.state.password}
+                                            onChange={this.onChange}/>
+                                    </div>
+                                    <div className="form-group">                                        
+                                        <input type="submit" onClick={this.onSubmit} name="submit" className="btn btn-info btn-md" value="submit"/>
+                                    </div>
+                                    <div id="register-link" className="text-right">
+                                        <a href="#" onClick={this.onRegister} className="text-info">Register here</a>
+                                    </div>
+                                    {!this.state.userValid && (
+                                        <div className="user-err">Invalid email or password</div>
+                                    )}
+                                </form>
                             </div>
-                            <div className="form-group">
-                                <label className="col-md-6" htmlFor="password">Password</label>
-                                <input type="password"
-                                    className="col-md-6 form-control"
-                                    name="password"
-                                    placeholder="Enter Password"
-                                    value={this.state.password}
-                                    onChange={this.onChange} />
-                            </div>
-                            {!this.state.userValid && (
-                                <div className="user-err">Invalid email or password</div>
-                            )}
-                            <button type="submit" onClick={this.onSubmit} className="col-md-3 btn btn-lg btn-primary">
-                                Sign in
-                            </button>
-                            <button type="button" onClick={this.onRegister} className="mr-1 col-md-3 btn btn-lg btn-primary">
-                                Register
-                            </button>
-                        </form>
+                        </div>
                     </div>
                 </div>
             </div>

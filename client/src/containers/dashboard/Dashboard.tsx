@@ -107,7 +107,7 @@ class Dashboard extends Component<any,any> {
             <div className="app">                
                 <div className="content">
                     <div className="container-fluid">
-                        <div className="col-md-6">
+                        <div className="col-md-8">
                             <form noValidate>
                                 <div className="form-group">
                                     <label className="col-md-6" htmlFor="totalExp">Total Experience</label>
@@ -125,7 +125,7 @@ class Dashboard extends Component<any,any> {
                                     </div>
                                 </div>
                                 <div className="form-group">
-                                    <label className="col-md-6" htmlFor="interestedIn">Interested In</label>
+                                    <label className="col-md-6" htmlFor="interestedIn">Enroll (Emerging Tech)</label>
                                     <div className="col-md-6 multiselect-pos pd-0">
                                         <ReactMultiSelectCheckboxes isDisabled={!this.state.isEditable} value={this.state.intrest} onChange={this.handleInChange} options={this.interestedOptions} />
                                     </div>                                    
