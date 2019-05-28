@@ -11,3 +11,14 @@
 .spacer {
     height: 2.5em
 }
+.con{
+    float: left;
+}
+.u-name{
+    float: left;
+    text-align: right;
+}
+.label-text{
+    display: inline-block;
+    font-size: 15px;
+}

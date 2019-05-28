@@ -11,17 +11,13 @@ class App extends React.Component<any, any> {
   constructor(props: any) {
     super(props);
     this.state = {
-      isLoggedIn: false,
-      uname:''
+      isLoggedIn: false
     }
     this.changeLoggingStatus = this.changeLoggingStatus.bind(this)
   }
-  changeLoggingStatus() {
-    let uname = localStorage.getItem('user-name')||'Guest';
-    
+  changeLoggingStatus() {    
     this.setState({
-      isLoggedIn:true,
-      uname:uname
+      isLoggedIn:true
     });
     
 
@@ -33,7 +29,7 @@ class App extends React.Component<any, any> {
         { this.state.isLoggedIn ? (
           <div>
             <div className="top-panel">
-                <Link to={'/'} className="navbar-brand">{this.state.uname}'s Home</Link>              
+                <Link to={'/'} className="navbar-brand">Enrolments App</Link>              
             </div>
               <nav className="left-panel">
                 <ul className="navbar-nav mr-auto">

@@ -9,6 +9,7 @@ class Search extends Component<any, any> {
         this.state = {
             search: '',
             users: [],
+            allUsers: [],
             columns: [
                 {
                     dataField: 'name',
@@ -28,12 +29,28 @@ class Search extends Component<any, any> {
         this.onSearch = this.onSearch.bind(this);
     }
     onSearch() {
+        debugger
         console.log("this.state.search :"+this.state.search);
-        // this.getusers(obj).then(res => {
-        //     if (res) {
-        //         this.setState({ isEditable: 0 });
-        //     }
-        // })
+        var s = "Mumbai";
+        if (s.match(/Mu.*/)) {
+        // do something
+        }
+        let searchResult = this.state.allUsers.filter((item: any) => {
+            let ser = this.state.search ? this.state.search.toLowerCase() : "";
+
+            if(item.name && item.name.toLowerCase().includes(ser)) {
+                return true;
+            } else if(item.primarySkills && item.primarySkills.toLowerCase().includes(ser)) {
+                return true;
+            } else if(item.intrestedIn && item.intrestedIn.toLowerCase().includes(ser)) {
+                return true;
+            }
+            return false;
+        });
+
+        this.setState({
+            users: searchResult
+        });
     }
     getusers = () => {
         return axios
@@ -72,7 +89,8 @@ class Search extends Component<any, any> {
                     }
                 });
                 this.setState({
-                    users: response
+                    users: response,
+                    allUsers: response
                 });
               }
         });
@@ -92,7 +110,7 @@ class Search extends Component<any, any> {
                         placeholder="Search"
                         value={this.state.search}
                         onChange={this.onChange}/>
-                    <button className="btn btn-primary col-md-2 srch-btn">
+                    <button onClick={this.onSearch} className="btn btn-primary col-md-2 srch-btn">
                         Search
                     </button>
                     <div className="table-container">

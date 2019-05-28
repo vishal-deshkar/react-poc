@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Route, Link, Switch } from 'react-router-dom'
 import axios from 'axios';
 import ReactMultiSelectCheckboxes from 'react-multiselect-checkboxes';
+import Multiselect from "@khanacademy/react-multi-select";
 import './Dashboard.css';
 
 class Dashboard extends Component<any,any> {
@@ -20,6 +21,7 @@ class Dashboard extends Component<any,any> {
         super(props);
         this.state = {
             id:'',
+            firstname:'',
             totalExp: '',
             skills: '',
             intrest: '',
@@ -27,6 +29,7 @@ class Dashboard extends Component<any,any> {
         }
         this.onChange = this.onChange.bind(this);
         this.onEdit = this.onEdit.bind(this);
+        this.checkInput = this.checkInput.bind(this);
     }
 
     componentDidMount() {
@@ -37,6 +40,7 @@ class Dashboard extends Component<any,any> {
                 console.log(res);
                 this.setState({
                     id: res._id,
+                    firstname:res.firstname,
                     totalExp: res.totalExp,
                     skills: res.skills,
                     intrest: res.intrest,
@@ -98,6 +102,17 @@ class Dashboard extends Component<any,any> {
         this.setState({ intrest });
     }
 
+    checkInput(evt: any) {
+        debugger
+        let regexp1 = new RegExp("[^0-9.]");
+        if(regexp1.test(evt.target.value))
+        {
+            evt.preventDefault();
+            // alert("Only numbers are allowed");
+            // return false;
+        }        
+    }
+
     onChange (e: any) {
         this.setState({ [e.target.name]: e.target.value })
     }
@@ -107,28 +122,51 @@ class Dashboard extends Component<any,any> {
             <div className="app">                
                 <div className="content">
                     <div className="container-fluid">
-                        <div className="col-md-8">
+                        <div className="col-md-8 con">
                             <form noValidate>
                                 <div className="form-group">
                                     <label className="col-md-6" htmlFor="totalExp">Total Experience</label>
                                     <input disabled={!this.state.isEditable} type="number"
                                         className="form-control col-md-6"
                                         name="totalExp"
+                                        pattern="\d+((\.|,)\d+)?"
                                         placeholder="Enter Total Experience"
                                         value={this.state.totalExp}
                                         onChange={this.onChange}/>
                                 </div>
                                 <div className="form-group">
                                     <label className="col-md-6" htmlFor="primarySkills">Primary Skills</label>
-                                    <div className="col-md-6 multiselect-pos pd-0">
-                                        <ReactMultiSelectCheckboxes isDisabled={!this.state.isEditable} value={this.state.skills} onChange={this.handlePsChange} options={this.primaryOptions} />
+                                    <div className="col-md-2 multiselect-pos pd-0">
+                                        <ReactMultiSelectCheckboxes name="primarySkills"  isDisabled={!this.state.isEditable} value={this.state.skills} onChange={this.handlePsChange} options={this.primaryOptions} />
+                                    </div>
+                                    <div className="col-md-4 label-text">
+                                        {this.state.skills?(this.state.skills.map((skill, index) => {
+                                            let label;
+                                            if (index != this.state.skills.length-1) {
+                                                label = <span key={index}>{skill.label+", "}</span>
+                                            } else {
+                                                label = <span key={index}>{skill.label}</span>
+                                            }
+                                            return (label);
+                                        })):null}
                                     </div>
                                 </div>
                                 <div className="form-group">
                                     <label className="col-md-6" htmlFor="interestedIn">Enroll (Emerging Tech)</label>
-                                    <div className="col-md-6 multiselect-pos pd-0">
+                                    <div className="col-md-2 multiselect-pos pd-0">
                                         <ReactMultiSelectCheckboxes isDisabled={!this.state.isEditable} value={this.state.intrest} onChange={this.handleInChange} options={this.interestedOptions} />
-                                    </div>                                    
+                                    </div>
+                                    <div className="col-md-4 label-text">
+                                        {this.state.intrest?(this.state.intrest.map((intitem, index) => {
+                                            let label;
+                                            if (index != this.state.intrest.length-1) {
+                                                label = <span key={index}>{intitem.label+", "}</span>
+                                            } else {
+                                                label = <span key={index}>{intitem.label}</span>
+                                            }
+                                            return (label);
+                                        })):null}
+                                    </div>
                                 </div>
                                 <div className="col-md-12 spacer"></div>
                                 <div className="col-md-12 pd-0 text-right">
@@ -142,6 +180,9 @@ class Dashboard extends Component<any,any> {
                                     </button>
                                 </div>                                
                             </form>
+                        </div>
+                        <div className="col-md-4 u-name">
+                        {`${this.state.firstname}'s Home`}
                         </div>
                     </div>
                 </div>
